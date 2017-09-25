@@ -24,7 +24,7 @@ SECRET_KEY = '*f0y(s_r$9c51o934ryvgqx0m*sjv%0+mg_#aq2+gw4&l-=w3t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['35.202.222.208', '127.0.0.1']
 
 # Application definition
 
@@ -102,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -114,3 +114,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+PROJECT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..').replace('\\', '/')
+SITE_ROOT = PROJECT_ROOT
+
+# Path to profile Pics
+PROFILE_PICS_ROOT = os.path.join(SITE_ROOT, 'profile_pics')
+PROFILE_PICS_URL = '/profile_pics/'
+
+# Path to Gallery Pics
+GALLERY_PICS_ROOT = os.path.join(SITE_ROOT, 'gallery_pics')
+GALLERY_PICS_URL = '/gallery_pics/'

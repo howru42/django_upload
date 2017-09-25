@@ -7,7 +7,6 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 @csrf_exempt
 def upload(request):
-    form = UploadForm(request.POST, request.FILES)
     _str = ""
     # if form.is_valid():
     parseFile(request.FILES["file"])
@@ -27,3 +26,7 @@ def parseFile(f):
         for chunk in f.chunks():
             destination.write(chunk)
     return
+
+
+def index(request):
+    return HttpResponse("<h2>Hello</h2>")
