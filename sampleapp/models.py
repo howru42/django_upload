@@ -7,23 +7,27 @@ from django.utils.safestring import mark_safe
 class Record(models.Model):
     name = models.CharField(max_length=256)
     mobile = models.CharField(max_length=11, default=None)
-    address = models.CharField(max_length=500, default=None, null=True)
+    address = models.CharField(max_length=500, default=None, null=True, blank=True)
     clinicName = models.CharField(max_length=256, default=None, null=True)
-    specialization = models.CharField(max_length=256, default=None, null=True)
-    morningTimeSlot = models.TimeField(default=timezone.now, null=True)
-    afternoonTimeSlot = models.TimeField(default=timezone.now, null=True)
-    eveningTimeSlot = models.TimeField(default=timezone.now, null=True)
-    FRESHMAN = 'FR'
-    SOPHOMORE = 'SO'
-    JUNIOR = 'JR'
-    SENIOR = 'SR'
-    YEAR_IN_SCHOOL_CHOICES = (
-        (FRESHMAN, 'Freshman'),
-        (SOPHOMORE, 'Sophomore'),
-        (JUNIOR, 'Junior'),
-        (SENIOR, 'Senior'),
-    )
-    services = models.CharField(choices=YEAR_IN_SCHOOL_CHOICES, max_length=2, default=FRESHMAN, null=True)
+    morningTimeSlotStart = models.TimeField(null=True, verbose_name='Morning Slot Start Time', blank=True)
+    morningTimeSlotEnd = models.TimeField(null=True, verbose_name='Morning Slot End Time', blank=True)
+    afternoonTimeSlotStart = models.TimeField(null=True, verbose_name='Afternoon Slot Start Time', blank=True)
+    afternoonTimeSlotEnd = models.TimeField(null=True, verbose_name='Afternoon Slot End Time', blank=True)
+    eveningTimeSlotStart = models.TimeField(null=True, verbose_name='Evening Slot Start Time', blank=True)
+    eveningTimeSlotEnd = models.TimeField(null=True, verbose_name='Evening Slot End Time', blank=True)
+
+    SP_GENERAL_PHYSICAN = '1'
+    SP_DENTIST = '2'
+
+    SP_CHOICES = ((SP_DENTIST, 'Dentist'), (SP_GENERAL_PHYSICAN, 'General Physician'),)
+    specialization = models.CharField(choices=SP_CHOICES, max_length=1, default=SP_GENERAL_PHYSICAN, null=True)
+
+    SERV_SKIN = '1'
+    SERV_HAIR = '2'
+    SERV_TATOO = '3'
+
+    SERVICES_CHOICES = ((SERV_SKIN, 'Skin Checks'), (SERV_HAIR, 'Hair Loss Treatment'), (SERV_TATOO, 'Tatoo Removal'))
+    services = models.CharField(choices=SERVICES_CHOICES, max_length=1, default=SERV_SKIN, null=True)
 
     profilePic = models.ImageField(upload_to='profile_pics', verbose_name='Profile Picture', null=True)
 
@@ -38,5 +42,5 @@ class Record(models.Model):
     image_tag.short_description = 'Image'
 
     class Meta(object):
-        verbose_name = "Doctor"
-        verbose_name_plural = "Doctors"
+        verbose_name = "Doctor Info"
+        verbose_name_plural = "Doctors List"
